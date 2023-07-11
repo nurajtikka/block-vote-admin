@@ -18,7 +18,7 @@ const CampaignData = (): JSX.Element | null => {
                             dataSource={votersList?.voters || []}
                             bordered
                             size="large"
-                            footer={() => '*These data are subjected to change.'}
+                            footer={() => '*These data might subjected to change.'}
                         />
                     </Col>
                 </Row>
@@ -32,7 +32,7 @@ const CampaignData = (): JSX.Element | null => {
                             dataSource={candidatesList?.candidates || []}
                             bordered
                             size="large"
-                            footer={() => '*These data are subjected to change.'}
+                            footer={() => '*These data might subjected to change.'}
                         />
                     </Col>
                 </Row>
@@ -46,7 +46,7 @@ const CampaignData = (): JSX.Element | null => {
                             dataSource={partiesList?.parties || []}
                             bordered
                             size="large"
-                            footer={() => '*These data are subjected to change.'}
+                            footer={() => '*These data might subjected to change.'}
                         />
                     </Col>
                 </Row>

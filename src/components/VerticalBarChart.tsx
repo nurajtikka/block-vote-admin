@@ -1,14 +1,13 @@
 import React from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
-type TProps = {
-    text: JSX.Element | string;
-};
+import useDashboardContext from '../app/contexts/DashboardContext';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const VerticalBarChart = (): JSX.Element => {
+const VerticalBarChart = (): JSX.Element | null => {
+    const { selectedDistrict, districtWiseVotes } = useDashboardContext();
+    const capitalizeFirstLetter = (value: string): string => value.charAt(0).toUpperCase() + value.slice(1);
     const options = {
         responsive: true,
         plugins: {
@@ -17,33 +16,24 @@ const VerticalBarChart = (): JSX.Element => {
             },
             title: {
                 display: true,
-                text: 'Chart.js Bar Chart',
+                text: `Party Wise Voting Criteria of ${capitalizeFirstLetter(selectedDistrict)} District`,
             },
         },
     };
-
-    const labels = ['Colombo', 'Gampaha', 'Kandy'];
-
+    const labels = [capitalizeFirstLetter(selectedDistrict)];
+    const constructedDataSet = districtWiseVotes?.counts.map((value) => ({
+        label: value.party,
+        data: [value.votes],
+        backgroundColor: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+        borderColor: 'rgba(0,0,0,0)',
+        borderWidth: 10,
+        maxBarThickness: 70,
+    }));
     const data = {
         labels,
-        datasets: [
-            {
-                label: 'Dataset 1',
-                data: [20, 30, 100],
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            },
-            {
-                label: 'Dataset 2',
-                data: [100, 203, 500],
-                backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            },
-        ],
+        datasets: constructedDataSet,
     };
-    return (
-        <>
-            <Bar options={options} data={data} />
-        </>
-    );
+    return <Bar options={options} data={data as any} />;
 };
 
 export default VerticalBarChart;

@@ -26,8 +26,8 @@ const VerticalBarChart = (): JSX.Element | null => {
         data: [value.votes],
         backgroundColor: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
         borderColor: 'rgba(0,0,0,0)',
-        borderWidth: 10,
-        maxBarThickness: 70,
+        borderWidth: 5,
+        maxBarThickness: 80,
     }));
     const data = {
         labels,

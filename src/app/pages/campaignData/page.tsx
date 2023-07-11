@@ -13,7 +13,7 @@ const CampaignData = (): JSX.Element | null => {
                 <Row gutter={16}>
                     <Col span={24}>
                         <Table
-                            loading={isLoading}
+                            loading={!isLoading}
                             columns={tableConfig.voters as any}
                             dataSource={votersList?.voters || []}
                             bordered
@@ -27,7 +27,7 @@ const CampaignData = (): JSX.Element | null => {
                 <Row gutter={16}>
                     <Col span={24}>
                         <Table
-                            loading={isLoading}
+                            loading={!isLoading}
                             columns={tableConfig.candidates as any}
                             dataSource={candidatesList?.candidates || []}
                             bordered
@@ -41,7 +41,7 @@ const CampaignData = (): JSX.Element | null => {
                 <Row gutter={16}>
                     <Col span={24}>
                         <Table
-                            loading={isLoading}
+                            loading={!isLoading}
                             columns={tableConfig.parties as any}
                             dataSource={partiesList?.parties || []}
                             bordered

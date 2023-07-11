@@ -1,0 +1,582 @@
+/* stylelint-disable no-duplicate-selectors */
+@use "mixins" as *;
+
+// 1. OUR VARS
+// -- a. COLORS
+// -- b. MISC
+// 2. GENERAL RESET
+// 3. CORE
+// 4. FORM ELEMENTS
+
+// --------------------------------------------------------------- 1. OUR VARS
+:root {
+    // ----------------------------------------- a. COLORS
+    --color-white: #fff;
+    --color-off-black: #282d31;
+    --color-gold: #dcb66c;
+    --color-coral: #ed6a5e;
+    --color-jade: #3baf7f;
+    --color-grey1: #797d80;
+    --color-grey2: #b0b4b7;
+    --color-grey3: #dbdbdb;
+    --color-grey4: #f7f7fa;
+    --color-off-white: #f9f7f1;
+    --color-system-blue: #1688ec;
+    --color-system-blue-tint: #e6f3ff;
+    --color-system-green: #38ad3e;
+    --color-system-green-tint: #e0f5e1;
+    --color-system-orange: #fbc02d;
+    --color-system-orange-tint: #ffedc1;
+    --color-system-red: #f21f24;
+    --color-system-red-tint: rgb(255 208 209 / 20%); // attention cli - ask ehab why he changed this to transparency
+
+    // ----------------------------------------- b. MISC
+    --site-horz-spacing: 16px; // attention cli leaving this named as is as used in other places like components, remove when replaced?
+    --spacing-site-horz: 16px;
+    --typography-en: "Noto Sans", "Helvetica Neue", arial, sans-serif;
+    --typography-ar: "Noto Sans Arabic", tahoma, sans-serif;
+}
+
+@include screen-min-tablet {
+    :root {
+        --site-horz-spacing: 24px;
+        --spacing-site-horz: 24px;
+    }
+}
+
+@include screen-min-desktop {
+    :root {
+        --site-horz-spacing: 32px;
+        --spacing-site-horz: 32px;
+    }
+}
+
+@include screen-min-desktop-lg {
+    :root {
+        --site-horz-spacing: 40px;
+        --spacing-site-horz: 40px;
+    }
+}
+
+// --------------------------------------------------------------- 2. GENERAL RESET
+
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+    content: "";
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+// --------------------------------------------------------------- 3. CORE
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+}
+
+*:focus-visible {
+    outline: 1px solid var(--color-system-blue);
+    outline-offset: 1px;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    background-color: var(--color-grey4);
+    color: var(--color-off-black);
+    font-family: var(--typography-en);
+    line-height: 1.5;
+
+    & html[dir="rtl"] {
+        font-family: var(--typography-ar);
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+strong,
+b {
+    font-weight: 700;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.siteWidthContainer {
+    padding-left: var(--spacing-site-horz);
+    padding-right: var(--spacing-site-horz);
+    margin-left: auto;
+    margin-right: auto;
+
+    // max-width: ${metrics.siteMaxWidthDesktop}; attention cli - check with guys if we need this
+}
+
+// @media ${breakpoints.minDesktopXLG} { attention cli - check with guys if we need this
+//     .siteWidthContainer {
+//         max-width: ${metrics.siteMaxWidthDesktopLG};
+//     }
+// }
+
+h1 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+// --------------------------------------------------------------- 4. FORM ELEMENTS
+input,
+textarea,
+select,
+button {
+    font: inherit;
+    font-size: 16px; /* prevent ios zoom plus who doesnt like user friendly form inputs? */
+    color: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+input::-ms-clear {
+    display: none; /* remove IE X - lets provide our own */
+}
+
+input::-webkit-search-cancel-button {
+    appearance: none; /* remove webkit X - lets provide our own */
+}
+
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    border-width: 0;
+    cursor: pointer;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="text"],
+textarea {
+    appearance: none;
+    border: 1px solid var(--color-grey2);
+    background-color: var(--color-white);
+    outline: none;
+}
+
+input[type="search"] {
+    appearance: none;
+    border: none;
+    background-color: rgb(219 219 219 / 50%); // This specific alpha-enabled color is not present in the design language
+    // attention cli check this - why is search grey
+}
+
+textarea {
+    resize: vertical;
+}
+
+select {
+    border: 1px solid var(--color-grey2);
+    background-color: var(--color-white);
+}
+
+button {
+    font-size: inherit;
+    appearance: none;
+    border: 0;
+    // background-color: transparent;
+    cursor: pointer;
+}
+
+button[disabled] {
+    cursor: default;
+}
+
+input:not([type="checkbox"]),
+input:not([type="radio"]),
+textarea,
+select {
+    display: block;
+    appearance: none;
+}
+
+input:not([type="checkbox"])::placeholder,
+input:not([type="radio"])::placeholder,
+textarea::placeholder,
+select::placeholder {
+    color: var(--color-grey2);
+}
+
+input[type="search"]::placeholder {
+    color: var(--color-grey1);
+}
+
+input:not([type="checkbox"]).error,
+input:not([type="radio"]).error,
+textarea.error,
+select.error {
+    border-color: var(--color-system-red);
+}
+.ant-btn-outline-white {
+    color: white;
+    border-color: black;
+    background-color: #80adba;
+  }
+
+  .ant-btn-outline-white:hover {
+    border-color: black !important;
+    color: black !important;
+    border: 2px solid black;
+    background-color: white;
+  }
+
+  .backBtn:hover {
+    color: black !important;
+  }
+  .button {
+    border: 3px solid #C1E1C1;
+    border-radius: 4px;
+    height: 160px;
+    width: 158px;
+
+  }
+
+  .button.clicked {
+    background-color: #C1E1C1;
+    color: #fff;
+    border: 3px solid #C1E1C1;
+  }
+  .button:hover {
+    border: 3px solid #C1E1C1;
+  }
+@media (hover: hover) and (pointer: fine) {
+    input:not([type="checkbox"]):hover,
+    input:not([type="radio"]):hover,
+    textarea:hover,
+    select:hover {
+        border-color: var(--color-grey1);
+    }
+}
+
+input:not([type="checkbox"]):focus,
+input:not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-off-black);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    input:not([type="checkbox"]).error,
+    input:not([type="radio"]).error,
+    textarea.error,
+    select.error {
+        border-color: var(--color-system-red);
+    }
+}
+
+input:not([type="checkbox"]).valid,
+input:not([type="radio"]).valid,
+textarea.valid,
+select.valid {
+    border-color: var(--color-system-green);
+}
+
+input:not([type="checkbox"])[disabled],
+input:not([type="radio"])[disabled],
+textarea[disabled],
+select[disabled] {
+    cursor: not-allowed;
+    border-color: var(--color-grey3);
+    background-color: var(--color-grey4);
+    color: var(--color-grey2);
+}
+
+// --------------------------------------------------------------- ATTENTION CLI STUFF THAT NEEDS CHECKING OR REORDERING
+// --------------------------------------------------------------- 5. CUSTOM ACTIONS (LINKS/BUTTONS)
+// --------------- 3A. TEXT ACTIONS
+.--sivvi-linkAccent,
+.--sivvi-linkBody {
+    text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .--sivvi-linkAccent:hover,
+    .--sivvi-linkBody:hover {
+        text-decoration: none;
+    }
+}
+
+// --- 3AA. ACCENT COLOR
+.--sivvi-linkAccent {
+    color: var(--color-jade);
+}
+
+.--sivvi-linkAccent:active {
+    color: var(--color-off-black);
+}
+
+// --- 3AB. BODY COLOR
+.--sivvi-linkBody {
+    color: var(--color-off-black);
+}
+
+.--sivvi-linkBody:active {
+    color: var(--color-jade);
+}
+
+.--sivvi-linkBody:disabled {
+    color: var(--color-grey2);
+}
+
+// --------------- 3B. ICON ACTIONS
+.--sivvi-iconLinkAccent,
+.--sivvi-iconLinkBody {
+    display: inline-flex;
+    column-gap: 8px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .--sivvi-iconLinkAccent:hover,
+    .--sivvi-iconLinkBody:hover {
+        color: var(--color-grey1);
+    }
+
+    .--sivvi-iconLinkAccent:hover img.--sivvi-icon,
+    .--sivvi-iconLinkBody:hover img.--sivvi-icon {
+        filter: brightness(0) saturate(100%) invert(51%) sepia(5%) saturate(276%) hue-rotate(163deg) brightness(94%) contrast(91%);
+    }
+}
+
+// --- 3BA. ACCENT COLOR
+.--sivvi-iconLinkAccent {
+    color: var(--color-jade);
+}
+
+.--sivvi-iconLinkAccent img.--sivvi-icon {
+    filter: brightness(0) saturate(100%) invert(57%) sepia(75%) saturate(339%) hue-rotate(103deg) brightness(88%) contrast(89%);
+}
+
+.--sivvi-iconLinkAccent:active {
+    color: var(--color-off-black);
+}
+
+.--sivvi-iconLinkAccent:active img.--sivvi-icon {
+    filter: none;
+}
+
+// --- 3BB. BODY COLOR
+.--sivvi-iconLinkBody {
+    color: var(--color-off-black);
+}
+
+.--sivvi-iconLinkBody img.--sivvi-icon {
+    filter: none;
+}
+
+.--sivvi-iconLinkBody:active {
+    color: var(--color-jade);
+}
+
+.--sivvi-iconLinkBody:active img.--sivvi-icon {
+    filter: brightness(0) saturate(100%) invert(57%) sepia(75%) saturate(339%) hue-rotate(103deg) brightness(88%) contrast(89%);
+}
+
+// /* Used in case of DateInput */ attention cli - check where this is used, cant this go in the date component itself?
+.fauxInput {
+    border: 1px solid var(--color-grey2);
+}
+
+.fauxInput > input {
+    border: 0;
+    height: 38px;
+    text-align: center;
+}
+
+.fauxInput:hover {
+    border: 1px solid var(--color-grey1);
+}
+
+.fauxInput:focus-within {
+    border: 1px solid var(--color-off-black);
+}
+
+.fauxInput.error {
+    border: 1px solid var(--color-system-red);
+}
+
+.fauxInput.valid {
+    border: 1px solid var(--color-system-green);
+}
+
+// ATTENTION CLI - CHECK THIS PLEASE - WHERE IS THIS USED? WHY ARE WE CHANGING STUFF LIKE THIS
+// ::-webkit-scrollbar {
+//     width: 6px;
+// }
+
+// ::-webkit-scrollbar-track {
+//     background-color: var(--color-grey3);
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background-color: var(--color-grey1);
+// }
+
+/* Firefox Support */
+// @supports(scrollbar-color: ${colors.grey3} ${colors.grey4}) {
+//     body {
+//         scrollbar-color ${colors.grey1} ${colors.grey3};
+//         scrollbar-width: 6px;
+//     }
+// }
+
+html[dir="rtl"] .ltrForce {
+    direction: ltr;
+    unicode-bidi: bidi-override;
+    text-align: right;
+}

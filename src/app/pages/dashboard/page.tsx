@@ -2,37 +2,27 @@
 
 import React from 'react';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import { Card, Col, Row, Statistic, Progress, Space } from 'antd';
+import { Card, Col, Row, Statistic, Progress, Space, Select, Table, Empty } from 'antd';
 import VerticalBarChart from '../../../components/VerticalBarChart';
-import TableComponent from '../../../components/TableComponent';
+import DoughnutChart from '../../../components/DoughnutChart';
+import selectConfig from '../../config/select.config';
+import tableConfig from '../../config/table.config';
+import useDashboardContext from '../../contexts/DashboardContext';
 
 const Dashboard = (): JSX.Element | null => {
-    const a = [
-        {
-            _id: '64a6d9f174bd94b8fdff77f4',
-            acronym: 'SLPP',
-            name: 'Sri Lanka Podujana Peramuna',
-            votes: 71,
-        },
-        {
-            _id: '64a6d9f174bd94b8fdff77f6',
-            acronym: 'SJB',
-            name: 'Samagi Jana Balawegaya',
-            votes: 25,
-        },
-        {
-            _id: '64a6d9f174bd94b8fdff77f5',
-            acronym: 'UNP',
-            name: 'United National Party',
-            votes: 23,
-        },
-        {
-            _id: '64a6d9f174bd94b8fdff77f7',
-            acronym: 'NPP',
-            name: "National People's Power",
-            votes: 15,
-        },
-    ];
+    const {
+        isLoading,
+        selectedDistrict,
+        partyVotesList,
+        utilizedVotes,
+        votesList,
+        districtWiseVotes,
+        setSelectedDistrict,
+    } = useDashboardContext();
+
+    const onChange = (value: string) => {
+        setSelectedDistrict(value);
+    };
 
     return (
         <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
@@ -94,15 +84,46 @@ const Dashboard = (): JSX.Element | null => {
                     <Progress percent={70} strokeColor={'#ff4d4f'} status="active" size={['100%', 25]} />
                 </Row>
             </Card>
-            <Card bordered={true} title="District Level Vote Count">
-                <Row gutter={16}>
-                    <VerticalBarChart />
-                </Row>
+            <Card
+                bordered={true}
+                title={
+                    <Space direction="horizontal" size="middle" style={{ display: 'flex' }}>
+                        District Wise Election Results
+                        <Select
+                            placeholder="Filter By District"
+                            optionFilterProp="children"
+                            style={{ width: 150 }}
+                            defaultValue="colombo"
+                            onChange={onChange}
+                            options={selectConfig.district}
+                        />
+                    </Space>
+                }
+            >
+                {!!districtWiseVotes ? (
+                    <Row gutter={16}>
+                        <Col span={16}>
+                            <VerticalBarChart />
+                        </Col>
+                        <Col span={8}>
+                            <DoughnutChart />
+                        </Col>
+                    </Row>
+                ) : (
+                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                )}
             </Card>
-            <Card bordered={true} title="District Level Vote Count">
+            <Card bordered={true} title="Voting Catalog Data">
                 <Row gutter={16}>
                     <Col span={24}>
-                        <TableComponent />
+                        <Table
+                            loading={isLoading}
+                            columns={tableConfig.votes as any}
+                            dataSource={votesList?.votes || []}
+                            bordered
+                            size="large"
+                            footer={() => '*These data are subjected to change.'}
+                        />
                     </Col>
                 </Row>
             </Card>

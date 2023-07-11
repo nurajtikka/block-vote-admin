@@ -1,15 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ProvideAppContext } from './contexts/AppContext';
+import '../styles/globals.scss';
 import { useRouter } from 'next/navigation';
 
 import { AreaChartOutlined, DatabaseOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme, Typography } from 'antd';
 import type { MenuProps } from 'antd';
 import Image from 'next/image';
-
-import '../styles/globals.scss';
+import { ProvideDashboardContext } from './contexts/DashboardContext';
 import { ProvideCampaignDataContext } from './contexts/CampaignDataContext';
 
 const { Header, Sider, Content } = Layout;
@@ -30,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body>
-                <ProvideAppContext>
+                <ProvideDashboardContext>
                     <ProvideCampaignDataContext>
                         <Layout>
                             <Sider collapsed={false}>
@@ -76,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             </Layout>
                         </Layout>
                     </ProvideCampaignDataContext>
-                </ProvideAppContext>
+                </ProvideDashboardContext>
             </body>
         </html>
     );

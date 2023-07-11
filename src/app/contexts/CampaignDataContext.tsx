@@ -25,7 +25,9 @@ export const ProvideCampaignDataContext = ({ children }: TProvideCampaignDataCon
     //  api states
     const [isLoading, setIsLoading] = useState<boolean>(INITIAL_DATA.isLoading);
     const [partiesList, setPartiesList] = useState<TGetPartiesListResponse | null>(INITIAL_DATA.partiesList);
-    const [candidatesList, setCandidatesList] = useState<TGetCandidatesListResponse | null>(INITIAL_DATA.candidatesList);
+    const [candidatesList, setCandidatesList] = useState<TGetCandidatesListResponse | null>(
+        INITIAL_DATA.candidatesList,
+    );
     const [votersList, setVotersList] = useState<TGetVotersListResponse | null>(INITIAL_DATA.votersList);
 
     // get party details
@@ -39,9 +41,9 @@ export const ProvideCampaignDataContext = ({ children }: TProvideCampaignDataCon
                 setPartiesList(null);
                 message.error('no party details are available at this moment, please try again in a while');
             }
-            setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
+            setPartiesList(null);
             message.error('no party details are available at this moment, please try again in a while');
         }
     }, []);
@@ -57,9 +59,9 @@ export const ProvideCampaignDataContext = ({ children }: TProvideCampaignDataCon
                 setCandidatesList(null);
                 message.error('no candidate details are available at this moment, please try again in a while');
             }
-            setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
+            setCandidatesList(null);
             message.error('no candidate candidate are available at this moment, please try again in a while');
         }
     }, []);
@@ -75,25 +77,31 @@ export const ProvideCampaignDataContext = ({ children }: TProvideCampaignDataCon
                 setVotersList(null);
                 message.error('no voter details are available at this moment, please try again in a while');
             }
-            setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
+            setVotersList(null);
             message.error('no voter candidate are available at this moment, please try again in a while');
         }
     }, []);
 
     // api triggers
     useEffect(() => {
-        getPartiesList();
-    }, [partiesList]);
+        if (!partiesList) {
+            getPartiesList();
+        }
+    }, [partiesList, getPartiesList]);
 
     useEffect(() => {
-        getCandidatesList();
-    }, [candidatesList]);
+        if (!candidatesList) {
+            getCandidatesList();
+        }
+    }, [candidatesList, getCandidatesList]);
 
     useEffect(() => {
-        getVotersList();
-    }, [votersList]);
+        if (!votersList) {
+            getVotersList();
+        }
+    }, [votersList, getVotersList]);
 
     //  context provider parameters
     const ctx = useMemo<TCampaignDataContext>(

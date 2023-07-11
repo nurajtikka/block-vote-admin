@@ -12,7 +12,7 @@ export type TGetVotersListResponse = {
     voters: { _id: string; name: string; age: string; gender: number; district: string; voted: boolean }[];
 };
 
-// api requests
+// api definitions
 type TGetPartiesList = () => Promise<AxiosResponse<TGetPartiesListResponse>>;
 
 type TGetCandidatesList = () => Promise<AxiosResponse<TGetCandidatesListResponse>>;

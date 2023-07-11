@@ -1,6 +1,3 @@
-
-
-
 const config = {
     parties: [
         {
@@ -71,6 +68,44 @@ const config = {
             title: 'Gender',
             dataIndex: 'gender',
             key: 'gender',
+            align: 'center'
+        },
+        {
+            title: 'District',
+            dataIndex: 'district',
+            key: 'district',
+            align: 'center'
+        },
+    ],
+    votes: [
+        {
+            title: 'Vote ID',
+            dataIndex: '_id',
+            key: '_id',
+            align: 'center'
+        },
+        {
+            title: 'Voter ID',
+            dataIndex: 'voter_id',
+            key: 'voter_id',
+            align: 'center'
+        },
+        {
+            title: 'Party ID',
+            dataIndex: 'party_id',
+            key: 'party_id',
+            align: 'center'
+        },
+        {
+            title: 'Candidate ID',
+            dataIndex: 'candidate_id',
+            key: 'candidate_id',
+            align: 'center'
+        },
+        {
+            title: 'Voted Time',
+            dataIndex: 'voted_time',
+            key: 'voted_time',
             align: 'center'
         },
         {

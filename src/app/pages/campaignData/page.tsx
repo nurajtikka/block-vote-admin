@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, Row, Col, Space, Table } from 'antd';
 import useCampaignDataContext from '../../contexts/CampaignDataContext';
-import config from '../../config/table.config';
+import tableConfig from '../../config/table.config';
 
 const CampaignData = (): JSX.Element | null => {
     const { isLoading, partiesList, candidatesList, votersList } = useCampaignDataContext();
@@ -13,8 +13,8 @@ const CampaignData = (): JSX.Element | null => {
                 <Row gutter={16}>
                     <Col span={24}>
                         <Table
-                            loading={!isLoading}
-                            columns={config.voters as any}
+                            loading={isLoading}
+                            columns={tableConfig.voters as any}
                             dataSource={votersList?.voters || []}
                             bordered
                             size="large"
@@ -27,8 +27,8 @@ const CampaignData = (): JSX.Element | null => {
                 <Row gutter={16}>
                     <Col span={24}>
                         <Table
-                            loading={!isLoading}
-                            columns={config.candidates as any}
+                            loading={isLoading}
+                            columns={tableConfig.candidates as any}
                             dataSource={candidatesList?.candidates || []}
                             bordered
                             size="large"
@@ -41,8 +41,8 @@ const CampaignData = (): JSX.Element | null => {
                 <Row gutter={16}>
                     <Col span={24}>
                         <Table
-                            loading={!isLoading}
-                            columns={config.parties as any}
+                            loading={isLoading}
+                            columns={tableConfig.parties as any}
                             dataSource={partiesList?.parties || []}
                             bordered
                             size="large"

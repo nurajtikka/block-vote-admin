@@ -5,7 +5,9 @@ import { TCampaignDataSVCEndpoints } from './campaignData/campaignData.types';
 
 import votes from './votes/votes';
 import campaignData from './campaignData/campaignData';
+import dashboard from './dashboard/dashboard';
 import { TVotesSVCEndpoints } from './votes/votes.types';
+import { TDashboardSVCEndpoints } from './dashboard/dashboard.types';
 
 
 //  API base URL - Change this correctly
@@ -29,3 +31,4 @@ export const initializeAxios = (): void => {
 
 export const votesSVC = (): TVotesSVCEndpoints => votes(api);
 export const campaignDataSVC = (): TCampaignDataSVCEndpoints => campaignData(api);
+export const dashboardSVC = (): TDashboardSVCEndpoints => dashboard(api);

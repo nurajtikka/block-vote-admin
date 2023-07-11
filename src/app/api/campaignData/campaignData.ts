@@ -10,7 +10,7 @@ import {
 import { BASE_URL } from '../index';
 
 //  api endpoints
-const Votes = (api: AxiosInstance): TCampaignDataSVCEndpoints => {
+const CampaignData = (api: AxiosInstance): TCampaignDataSVCEndpoints => {
     // list parties details
     const getPartiesList = () => api.get<TGetPartiesListResponse>(`${BASE_URL}/parties/list/all`);
 
@@ -27,4 +27,4 @@ const Votes = (api: AxiosInstance): TCampaignDataSVCEndpoints => {
     };
 };
 
-export default Votes;
+export default CampaignData;

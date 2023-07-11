@@ -1,8 +1,16 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Axios, { AxiosInstance } from 'axios';
 
+import { TCampaignDataSVCEndpoints } from './campaignData/campaignData.types';
+
 import votes from './votes/votes';
+import campaignData from './campaignData/campaignData';
 import { TVotesSVCEndpoints } from './votes/votes.types';
+
+
+//  API base URL - Change this correctly
+// const BASE_URL = 'http://192.168.8.187:3001/_svc/block-vote/api/v1';
+export const BASE_URL = 'http://localhost:3001/_svc/block-vote/api/v1';
 
 //  API instance
 let api: AxiosInstance = Axios.create({
@@ -20,3 +28,4 @@ export const initializeAxios = (): void => {
 };
 
 export const votesSVC = (): TVotesSVCEndpoints => votes(api);
+export const campaignDataSVC = (): TCampaignDataSVCEndpoints => campaignData(api);

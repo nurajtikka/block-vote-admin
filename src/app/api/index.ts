@@ -7,7 +7,6 @@ import campaignData from './campaignData/campaignData';
 import dashboard from './dashboard/dashboard';
 import { TDashboardSVCEndpoints } from './dashboard/dashboard.types';
 
-
 //  API base URL - Change this correctly
 // const BASE_URL = 'http://192.168.8.187:3001/_svc/block-vote/api/v1';
 export const BASE_URL = 'http://localhost:3001/_svc/block-vote/api/v1';

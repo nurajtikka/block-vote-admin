@@ -5,12 +5,8 @@
     "license": "UNLICENSED",
     "author": "Nuraj Tilakaratne",
     "scripts": {
-        "dev": "yarn msg && PORT=30040 concurrently -k -n \"N,PROXY\" -i \"next dev\" \"yarn start-ssl-proxy\"",
+        "dev": "next dev",
         "build": "next build",
-        "build-ssl-proxy": "yarn build && PORT=30040 concurrently -k -n \"N,PROXY\" \"next start\" \"yarn start-ssl-proxy\"",
-        "msg": "echo \"\n\n--> https://localhost:3004/ \n\n\"",
-        "start-ssl-dev-proxy": "local-ssl-proxy --source 3004 --target 3000",
-        "start-ssl-proxy": "local-ssl-proxy --source 3004 --target $PORT",
         "start": "next start",
         "lint": "next lint"
     },
